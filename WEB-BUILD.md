@@ -37,3 +37,9 @@ The repository contains Unity source/settings/packages and `.meta` files, Blende
 `WebLoaderFix.Apply()` runs after web builds. It guards Unity's decompression-fallback worker download when a single-threaded build has no worker URL. Without it, this version's generated loader throws `Cannot read properties of undefined (reading match)` before loading game data. The workaround checks the expected generated code and stops the build if an engine update changes it, rather than silently producing a broken loader. An already repaired loader is left unchanged.
 
 The local browser startup was inspected after this repair; game content rendered and the loading bar closed. No gameplay tests were performed.
+
+## Publish to Vercel
+
+Public game: https://bagging-order.vercel.app
+
+After building locally, run `./deploy-web.ps1` while signed into the intended Vercel account. The script uploads only the generated Unity WebGL folder and uses `deploy/vercel.json` for static hosting. It does not publish the old Three.js prototype. GitHub pushes alone do not rebuild or redeploy Unity; run the build and deploy scripts for each release. The local `.vercel` project link is ignored by Git.
