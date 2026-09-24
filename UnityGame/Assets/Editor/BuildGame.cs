@@ -59,6 +59,7 @@ public static class BuildGame
         PlayerSettings.WebGL.compressionFormat=WebGLCompressionFormat.Gzip;PlayerSettings.WebGL.decompressionFallback=true;
         var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{"Assets/Scenes/Checkout.unity"},locationPathName="Builds/WebGL",target=BuildTarget.WebGL,options=BuildOptions.None});
         if(report.summary.result!=BuildResult.Succeeded)throw new Exception("Web build failed");
+        WebLoaderFix.Apply();
         Debug.Log("BAGGING_WEB_BUILD_PASS "+report.summary.totalSize+" bytes");
     }
     public static void Configure()
