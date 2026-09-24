@@ -150,3 +150,7 @@ Turn/Tip now use supersampled code-drawn icons and the shared rounded paper butt
 
 Latest preview: `Builds/WindowsDiscoveries/BaggingOrder.exe`.
 Open Map → New puzzles for levels 16–21 in Little discoveries: The narrow strip, The breakfast lid, Soft landing, Save the headroom, A chilled corner, Two different jobs. Existing levels and scores remain intact. All six are exact-fill designs; cold grouping is introduced after shape, ordering and headroom. AHA-LEVELS.md records intended discoveries and hand-authored constructions, not executed solver results. The map supports the longer chapter and caps the trail texture to the device size limit. Compile with checks skipped; no automated solver or gameplay tests run.
+
+## Bag button alignment
+
+Bag tabs and the add-bag button now use one shared renderer, a consistent 17-point font, centered single-line text, and 76-unit widths. The selector centers only the visible buttons, removing the empty add-button space when the bag limit is reached. Web build compiled with checks skipped; no playtesting run.

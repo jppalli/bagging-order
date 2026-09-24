@@ -197,13 +197,26 @@ namespace BaggingOrder
             if(Level.TargetBags<=1)return;
             float w=Screen.width/UIScale,h=Screen.height/UIScale;
             int first=Mathf.Clamp(bagIndex-1,0,Mathf.Max(0,bags.Count-3));
-            int count=Mathf.Min(3,bags.Count);float start=w*.5f-(count*68+66)*.5f;
+            int count=Mathf.Min(3,bags.Count);bool canAdd=bags.Count<Level.TargetBags;
+            const float tabWidth=76,gap=8;
+            int slots=count+(canAdd?1:0);float start=(w-(slots*tabWidth+(slots-1)*gap))*.5f;
             for(int slot=0;slot<count;slot++){
-                int index=first+slot;var r=new Rect(start+slot*68,h-57,62,38);
-                if(index==bagIndex){PaintedTile(r,Sun);Text(r,"Bag "+(index+1),17,Ink,true,TextAnchor.MiddleCenter);}
-                else if(Sticker("bag-tab-"+index,r,"Bag "+(index+1),Paper,!dragging&&!feeding))SwitchBag(index);
+                int index=first+slot;var r=new Rect(start+slot*(tabWidth+gap),h-57,tabWidth,38);
+                if(BagTab(r,"Bag "+(index+1),index==bagIndex,!dragging&&!feeding&&index!=bagIndex))SwitchBag(index);
             }
-            if(bags.Count<Level.TargetBags&&Sticker("bag-add",new Rect(start+count*68,h-57,62,38),"+ Bag",Paper,!dragging&&!feeding&&bags[bagIndex].Count>0))OpenNewBag();
+            if(canAdd&&BagTab(new Rect(start+count*(tabWidth+gap),h-57,tabWidth,38),"+ Bag",false,!dragging&&!feeding&&bags[bagIndex].Count>0))OpenNewBag();
+        }
+        bool BagTab(Rect r,string label,bool active,bool allowed)
+        {
+            bool prior=GUI.enabled;GUI.enabled=prior&&allowed;
+            bool hover=GUI.enabled&&r.Contains(Event.current.mousePosition);
+            bool clicked=GUI.Button(r,GUIContent.none,GUIStyle.none);GUI.enabled=prior;
+            Color fill=active?Sun:hover?Color.Lerp(Paper,Sun,.15f):Paper;
+            SoftShadow(r,.10f);PaintedTile(r,fill);
+            var style=new GUIStyle(GUI.skin.label){font=displayFont,fontSize=17,alignment=TextAnchor.MiddleCenter,wordWrap=false,padding=new RectOffset(0,0,0,0),margin=new RectOffset(0,0,0,0)};
+            style.normal.textColor=active||allowed?Ink:Color.Lerp(Ink,Paper,.35f);
+            GUI.Label(new Rect(r.x+4,r.y,r.width-8,r.height),label,style);
+            if(clicked)PlaySoft(uiSound);return clicked;
         }
         void DrawGroceryProgress(float w)
         {
