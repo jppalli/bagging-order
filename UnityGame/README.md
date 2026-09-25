@@ -154,3 +154,7 @@ Open Map → New puzzles for levels 16–21 in Little discoveries: The narrow st
 ## Bag button alignment
 
 Bag tabs and the add-bag button now use one shared renderer, a consistent 17-point font, centered single-line text, and 76-unit widths. The selector centers only the visible buttons, removing the empty add-button space when the bag limit is reached. Web build compiled with checks skipped; no playtesting run.
+
+## Tutorial-first map and progress reset
+
+The six discovery puzzles now open the journey at levels 1–6. Map sections are First discoveries, Corner shop, Market square, Pantry puzzles, and Ready to go; First steps jumps to level one. Menu → Reset progress asks for confirmation, clears this game's local scores/visited state, and returns to the first stop. Existing saves migrate by level identity; sound preferences are retained. No playtesting or progress reset was performed.

@@ -1,6 +1,6 @@
 # Little discoveries: six authored puzzles
 
-Levels 16–21, accessible through **Map → New puzzles**. Earlier levels and saved scores are preserved. These are handcrafted layouts, not random generation.
+Levels 1–6 in **First discoveries**, accessible through **Map → First steps**. The earlier lessons and challenges follow them; saved scores remain attached to level names. These are handcrafted layouts, not random generation.
 
 ## Design intent
 
@@ -10,7 +10,7 @@ Cold means the existing milk, yogurt and frozen peas. Eggs and ordinary produce 
 
 The solutions below are authored constructions reasoned against the source rules, **not executed solver results or playtest findings**. Alternative solutions are welcome. We have not established uniqueness or human difficulty.
 
-## 16. The narrow strip
+## 1. The narrow strip
 
 **Bag:** 3 wide × 2 deep × 1 high. **Order:** three loaves. **Volume:** 6/6.
 
@@ -22,7 +22,7 @@ With unchanged 2-wide footprints, at most one loaf fits in each of the two rows.
 
 **Watch during playtesting:** Is the remaining strip readable? Does the player discover Turn without being told the answer?
 
-## 17. The breakfast lid
+## 2. The breakfast lid
 
 **Bag:** 3 × 2 × 2. **Order:** cornflakes, milk, peas, yogurt, rice. **Volume:** 12/12.
 
@@ -36,7 +36,7 @@ The cornflakes cannot remain three cells tall. A tempting full-floor carton base
 
 **Watch:** Does the cereal-as-lid discovery feel different from simply laying it flat? If the first attempt crushes the base, is the cause understandable?
 
-## 18. Soft landing
+## 3. Soft landing
 
 **Bag:** 2 × 2 × 2. **Order:** yogurt, can, can, yogurt, can, can, yogurt, yogurt. **Volume:** 8/8.
 
@@ -48,7 +48,7 @@ All pieces are single cells and the filled bag has four columns of height two. A
 
 **Watch:** Does the player use selection order rather than assuming a fixed conveyor sequence? This is a short weight lesson, not a difficult geometry puzzle.
 
-## 19. Save the headroom
+## 4. Save the headroom
 
 **Bag:** 2 × 2 × 4. **Order:** flowers, cereal, cereal, flowers, flowers, cereal, rice. **Volume:** 16/16.
 
@@ -62,7 +62,7 @@ Three bouquets occupy three columns for three levels each and carry no load. Wit
 
 **Watch:** Is the one-level platform discovery legible? The level may be harder than the previous three because it combines headroom with support.
 
-## 20. A chilled corner
+## 5. A chilled corner
 
 **Bag:** 3 × 2 × 2. **Order:** milk, cereal, rice, peas, rice, yogurt, rice, rice, rice. **Volume:** 12/12.
 
@@ -76,7 +76,7 @@ Three bouquets occupy three columns for three levels each and carry no load. Wit
 
 **Watch:** Does the player recognize face contact? This is a grouping lesson; it does not force yogurt to be the unique connector.
 
-## 21. Two different jobs
+## 6. Two different jobs
 
 **Bags:** two bags, each 2 × 2 × 3. **Order:** flowers, rice, cornflakes, milk, rice, flowers, peas, rice, flowers, yogurt, rice. **Volume:** 24/24.
 

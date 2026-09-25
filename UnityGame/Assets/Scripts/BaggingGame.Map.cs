@@ -14,8 +14,11 @@ namespace BaggingOrder
         static string BestKey(int index)=>"bagging-best-"+PackingRules.Levels[index].Name;
         static string VisitKey(int index)=>"bagging-visited-"+PackingRules.Levels[index].Name;
         void OpenWorldMap(){CancelDrag();mapSelection=level;showList=false;showLevels=true;mapPreviewOpen=false;mapNeedsFocus=true;mapFocus=level;}
-        Color DistrictColor(int index)=>index<4?new Color(.57f,.73f,.40f):index<8?new Color(.36f,.67f,.67f):index<12?new Color(.87f,.57f,.31f):index<15?new Color(.70f,.48f,.65f):new Color(.39f,.62f,.48f);
-        string DistrictName(int index)=>index<4?"Corner shop":index<8?"Market square":index<12?"Bakery lane":index<15?"Delivery gardens":"Little discoveries";
+        static readonly int[] DistrictStarts={0,6,10,14,18};
+        static readonly string[] DistrictTitles={"First discoveries","Corner shop","Market square","Pantry puzzles","Ready to go"};
+        int DistrictIndex(int index){for(int i=DistrictStarts.Length-1;i>=0;i--)if(index>=DistrictStarts[i])return i;return 0;}
+        Color DistrictColor(int index){int d=DistrictIndex(index);return d==0?new Color(.39f,.62f,.48f):d==1?new Color(.57f,.73f,.40f):d==2?new Color(.36f,.67f,.67f):d==3?new Color(.87f,.57f,.31f):new Color(.70f,.48f,.65f);}
+        string DistrictName(int index)=>DistrictTitles[DistrictIndex(index)];
         Vector2 MapStop(int index,float width,float height)
         {
             float wave=Mathf.Sin(index*.94f)*Mathf.Min(185,width*.16f);
@@ -41,9 +44,9 @@ namespace BaggingOrder
             if(journeyPainting==null)journeyPainting=Resources.Load<Texture2D>("UI/journey-map-painted");
             if(journeyPainting!=null)GUI.DrawTexture(new Rect(0,0,canvasWidth,canvasHeight),journeyPainting,ScaleMode.StretchToFill);
             DrawSmoothTrail(canvasWidth,canvasHeight);
-            for(int district=0;district<5;district++){
-                int first=district<4?district*4:15;
-                int last=district<3?first+3:district==3?14:PackingRules.Levels.Length-1;
+            for(int district=0;district<DistrictStarts.Length;district++){
+                int first=DistrictStarts[district];
+                int last=district+1<DistrictStarts.Length?DistrictStarts[district+1]-1:PackingRules.Levels.Length-1;
                 var banner=new Rect(canvasWidth*.5f-105,MapStop(last,canvasWidth,canvasHeight).y-121,210,32);
                 SoftShadow(banner);PaintedTile(banner,Paper);Text(banner,DistrictName(first),18,Ink,true,TextAnchor.MiddleCenter);
             }
@@ -55,11 +58,11 @@ namespace BaggingOrder
             GUI.EndScrollView();
             Fill(new Rect(0,0,w,88),Paper);Line(new Vector2(0,87),new Vector2(w,87),2,new Color(.3f,.4f,.2f,.16f));
             Text(new Rect(24,12,w-168,38),"The grocery trail",29,Ink,true);
-            Text(new Rect(26,51,w-166,25),"All checkouts unlocked - choose your next stop",13,Ink);
+            Text(new Rect(26,51,w-166,25),"Start with First discoveries - every stop is open",13,Ink);
             if(Sticker("map-close",new Rect(w-127,24,102,43),complete?"Results":"Back",Paper)){showLevels=false;mapPreviewOpen=false;return;}
             Fill(new Rect(0,h-60,w,60),Paper);
             if(Sticker("map-current",new Rect(22,h-49,128,36),"Current level",Paper)){mapFocus=level;mapNeedsFocus=true;}
-            if(Sticker("map-new",new Rect(w-157,h-49,135,36),"New puzzles",Sun)){mapFocus=15;mapNeedsFocus=true;}
+            if(Sticker("map-new",new Rect(w-157,h-49,135,36),"First steps",Sun)){mapFocus=0;mapNeedsFocus=true;}
             if(Sticker("map-sound",new Rect(w*.5f-64,h-49,128,36),muted?"Sound off":"Sound on",Sage))ToggleSound();
             GUI.enabled=true;
             if(mapPreviewOpen)DrawJourneyPreview(w,h);

@@ -97,7 +97,7 @@ namespace BaggingOrder
             queueArt=new GameObject("Choose a grocery").transform;queueArt.SetParent(world);
             hints=new GameObject("Landing previews").transform;hints.SetParent(world);
             InitializeAudio();
-            DressShop();level=Mathf.Clamp(PlayerPrefs.GetInt("checkout-curriculum-v2",0),0,PackingRules.Levels.Length-1);StartLevel();PrepareMarketUI();mapSelection=level;showLevels=!Environment.GetCommandLineArgs().Contains("-baggingSmokeTest");
+            DressShop();level=LoadProgressLevel();StartLevel();PrepareMarketUI();mapSelection=level;showLevels=!Environment.GetCommandLineArgs().Contains("-baggingSmokeTest");
             if(Application.isPlaying&&Environment.GetCommandLineArgs().Contains("-baggingSmokeTest"))StartCoroutine(SmokeTest());
         }
         static Material Mat(Color color){var m=new Material(Shader.Find("Standard"));m.color=color;m.SetFloat("_Glossiness",.12f);return m;}
@@ -108,6 +108,8 @@ namespace BaggingOrder
         void StartLevel()
         {
             if(successOut!=null)successOut.Stop();
+            confirmProgressReset=false;
+            if(Application.isPlaying&&!Environment.GetCommandLineArgs().Contains("-baggingSmokeTest"))SaveProgressLevel(level);
             ResetBagTransition();CancelDrag();if(feedRoutine!=null)StopCoroutine(feedRoutine);feedRoutine=null;feeding=false;queueObjects.Clear();Clear(queueArt);complete=false;history.Clear();bagIndex=0;bags=new List<List<PackedItem>>{new List<PackedItem>()};
             remaining=Level.Items.Select((key,id)=>new PackedItem{Key=key,Id=id}).ToList();
             Clear(bagArt);float h=Level.Height,w=Level.Width,d=Level.Depth;
@@ -460,7 +462,7 @@ namespace BaggingOrder
                 complete=true;completedAt=Time.unscaledTime;status="All packed!";BeginWinCelebration();
                 if(!Environment.GetCommandLineArgs().Contains("-baggingSmokeTest")){
                     int stars=PackingRules.Stars(Level,bags);PlayerPrefs.SetInt(BestKey(level),Mathf.Max(stars,PlayerPrefs.GetInt(BestKey(level),0)));
-                    PlayerPrefs.SetInt("checkout-curriculum-v2",Mathf.Min(level+1,PackingRules.Levels.Length-1));PlayerPrefs.Save();
+                    SaveProgressLevel(Mathf.Min(level+1,PackingRules.Levels.Length-1));
                 }
                 if(Level.SealHeight>0)StartCoroutine(SealBag());
             }

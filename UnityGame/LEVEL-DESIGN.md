@@ -85,3 +85,15 @@ These are authored constructions, not newly executed solver results. The player 
 ## Authored discovery chapter (16–21)
 
 See AHA-LEVELS.md for six exact-fill puzzles, intended discoveries, load-aware construction plans, conveyor choices, and playtest questions. These new constructions are not covered by earlier solver-verification claims; no solver or gameplay tests were run for this pass. Use Map → New puzzles to jump to the chapter.
+
+## Current map order: tutorials first
+
+1–6 First discoveries: The narrow strip, The breakfast lid, Soft landing, Save the headroom, A chilled corner, Two different jobs.
+7–10 Corner shop: A sturdy start, Delicate on top, A quarter turn, Lay it down.
+11–14 Market square: This way up, Room for another, Keep it cool, The weekly shop.
+15–18 Pantry puzzles: The last loaf, A careful squeeze, Make room below, Family size.
+19–21 Ready to go: Breakfast to go, Narrow aisles, Ready to seal.
+
+All stops remain open for out-of-order testing. Earlier level numbers in historical notes refer to the old order. Stars/visited flags are name-based; the legacy resume index is migrated to the same named checkout. New resume data stores a level name so future reorderings cannot send the player to the wrong puzzle.
+
+Menu → Reset progress has a separate confirmation screen. Confirming clears this game's stars, visited flags and resume data on the current device, starts a clean first level, then opens the map at the first stop. It preserves the sound preference and does not delete unrelated preferences. The reset was implemented, not executed against user progress.

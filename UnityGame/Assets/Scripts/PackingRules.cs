@@ -70,6 +70,12 @@ namespace BaggingOrder
             {"peas",new Grocery("peas","Frozen peas",2,1,1,2,4,cold:true)}
         };
         public static readonly Checkout[] Levels={
+            new Checkout("The narrow strip","Three loaves, one shallow bag. Every space counts.",new[]{"bread","bread","bread"}){Height=1,PerfectFit=true},
+            new Checkout("The breakfast lid","A family box and a shallow bag. Choose what goes in first.",new[]{"cornflakes","milk","peas","yogurt","rice"}){Height=2,PerfectFit=true},
+            new Checkout("Soft landing","The yogurt is delicate. Fill the bag without crushing it.",new[]{"yogurt","can","can","yogurt","can","can","yogurt","yogurt"}){Width=2,Height=2,PerfectFit=true},
+            new Checkout("Save the headroom","Flowers stay upright and need clear space above them.",new[]{"flowers","cereal","cereal","flowers","flowers","cereal","rice"}){Width=2,PerfectFit=true},
+            new Checkout("A chilled corner","Milk, peas and yogurt must touch in one group. Corners do not connect.",new[]{"milk","cereal","rice","peas","rice","yogurt","rice","rice","rice"},cold:true){Height=2,PerfectFit=true},
+            new Checkout("Two different jobs","Fill both bags. Keep chilled groceries together and flowers uncovered.",new[]{"flowers","rice","cornflakes","milk","rice","flowers","peas","rice","flowers","yogurt","rice"},cold:true){Width=2,Height=3,TargetBags=2,PerfectFit=true},
             new Checkout("A sturdy start","Start with sturdy groceries. Try both rows of the bag.",new[]{"can","can","rice","cereal","can","rice"}),
             new Checkout("Delicate on top","Bananas bruise like eggs. Put sturdy groceries underneath them.",new[]{"bananas","eggs","can","can","bread","apple"}),
             new Checkout("A quarter turn","Select bread or eggs, then use Turn to change their footprint.",new[]{"can","rice","eggs","bread","cereal","apple"},turn:true),
@@ -82,16 +88,9 @@ namespace BaggingOrder
             new Checkout("A careful squeeze","Build with peas, protect the eggs, and rotate to fill the remaining spaces.",new[]{"peas","peas","bread","peas","bread","bread","eggs","bread","eggs","eggs"}){RotationProof=1},
             new Checkout("Make room below","Flowers need three levels of headroom. What can lie flat beneath them?",new[]{"cereal","cereal","flowers","cereal","cereal","flowers","cereal","cereal","cereal","cereal","cereal"}){RotationProof=2},
             new Checkout("Family size","Three big cereal boxes, one bag. Turn and tip to find room for breakfast.",new[]{"cornflakes","cornflakes","cornflakes","milk","rice","can"},tip:true),
-            new Checkout("Breakfast to go","A shallow bag: lay both family boxes flat and fill every space.",new[]{"cornflakes","cornflakes"}){Height=2,PerfectFit=true,Experimental=true},
-            new Checkout("Narrow aisles","Tip the milk to make a low base. The tall cereal boxes need their headroom.",new[]{"milk","cornflakes","milk","cornflakes"},tip:true){Width=2,Experimental=true},
-            new Checkout("Ready to seal","Build a level top at the gold mark. Leave nothing unsupported.",new[]{"rice","rice","rice","cereal","cereal","cereal","rice","rice","rice","cereal","cereal","cereal"}){SealHeight=3,Experimental=true},
-            // Authored discovery sequence. Construction notes live in AHA-LEVELS.md.
-            new Checkout("The narrow strip","Three loaves, one shallow bag. Every space counts.",new[]{"bread","bread","bread"}){Height=1,PerfectFit=true,Experimental=true},
-            new Checkout("The breakfast lid","A family box and a shallow bag. Choose what goes in first.",new[]{"cornflakes","milk","peas","yogurt","rice"}){Height=2,PerfectFit=true,Experimental=true},
-            new Checkout("Soft landing","The yogurt is delicate. Fill the bag without crushing it.",new[]{"yogurt","can","can","yogurt","can","can","yogurt","yogurt"}){Width=2,Height=2,PerfectFit=true,Experimental=true},
-            new Checkout("Save the headroom","Flowers stay upright and need clear space above them.",new[]{"flowers","cereal","cereal","flowers","flowers","cereal","rice"}){Width=2,PerfectFit=true,Experimental=true},
-            new Checkout("A chilled corner","Milk, peas and yogurt must touch in one group. Corners do not connect.",new[]{"milk","cereal","rice","peas","rice","yogurt","rice","rice","rice"},cold:true){Height=2,PerfectFit=true,Experimental=true},
-            new Checkout("Two different jobs","Fill both bags. Keep chilled groceries together and flowers uncovered.",new[]{"flowers","rice","cornflakes","milk","rice","flowers","peas","rice","flowers","yogurt","rice"},cold:true){Width=2,Height=3,TargetBags=2,PerfectFit=true,Experimental=true}
+            new Checkout("Breakfast to go","A shallow bag: lay both family boxes flat and fill every space.",new[]{"cornflakes","cornflakes"}){Height=2,PerfectFit=true},
+            new Checkout("Narrow aisles","Tip the milk to make a low base. The tall cereal boxes need their headroom.",new[]{"milk","cornflakes","milk","cornflakes"},tip:true){Width=2},
+            new Checkout("Ready to seal","Build a level top at the gold mark. Leave nothing unsupported.",new[]{"rice","rice","rice","cereal","cereal","cereal","rice","rice","rice","cereal","cereal","cereal"}){SealHeight=3}
 
         };
         public static readonly List<Quaternion> Orientations=BuildOrientations();
